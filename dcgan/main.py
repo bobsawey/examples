@@ -234,12 +234,13 @@ for epoch in range(opt.niter):
               % (epoch, opt.niter, i, len(dataloader),
                  errD.item(), errG.item(), D_x, D_G_z1, D_G_z2))
         if i % 100 == 0:
+            import uuid
             vutils.save_image(real_cpu,
                     '%s/real_samples.png' % opt.outf,
                     normalize=True)
             fake = netG(fixed_noise)
             vutils.save_image(fake.detach(),
-                    '%s/fake_samples_epoch_%03d.png' % (opt.outf, epoch),
+                    '%s/fake_samples_epoch_%s.%03d.png' % (opt.outf, uuid.uuid4(), epoch),
                     normalize=True)
 
     # do checkpointing
